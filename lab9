@@ -1,0 +1,123 @@
+# Team 4: Naji, Braden, Colin
+# CS 115 Section 401
+
+# Purpose: Determine which time is earlier
+# Pre-conditions: 6 integers
+# Post-conditions: One of three values: 0, 1 , or 2.
+#                  0 = same time
+#                  1 = 1st time was earlier
+#                  2 = 2nd time was earlier
+
+def time_compare(h1, m1, s1, h2, m2, s2):
+    if h1 == h2:
+        if m1 == m2:
+            if s1 == s2:
+                comparison = 0
+            elif s1 < s2:
+                comparison = 1
+            else:
+                comparison = 2
+        elif m1 < m2:
+            comparison = 1
+        else:
+            comparison = 2
+    elif h1 < h2:
+        comparison = 1
+    else:
+        comparison = 2
+
+    return comparison
+
+
+# Purpose: Format 3 numbers to into hours:minutes:seconds, if they aren't greater than 9, then they will be reformatted
+# Pre-conditions: 3 integers
+# Post-conditions: a reformatted time of hours:minutes:seconds
+
+def time_print(hour, minute, second):
+    if not hour > 9:
+        hour = f'0{hour}'
+    else:
+        hour = str(hour)
+    if not minute > 9:
+        minute = f'0{minute}'
+    else:
+        minute = str(minute)
+    if not second > 9:
+        second = f'0{second}'
+    else:
+        second = str(second)
+    return print(hour, minute, second, sep=":")
+
+
+# Purpose: Determine which time is earlier
+# Pre-conditions:
+# Post-conditions:
+
+
+def main():
+    print("Mastery is not a function of genius or talent, but a function of time\n"
+          "and intense focus applied to a particular field of knowledge.")
+
+    # Enter first hours or -1 to stop: 1
+    # FIX ME, this whole thing need to be in some sort of loop. Check end of test cases on website for clarity
+
+    first_hours = input("\nEnter first hours or -1 to stop: ")
+    if not first_hours == -1:
+        first_minutes = input("Enter first minutes: ")
+        first_seconds = input("Enter first seconds: ")
+        second_hours = input("Enter second hours: ")
+        second_minutes = input("Enter second minutes: ")
+        second_seconds = input("Enter second seconds: ")
+
+        print("Time 1: ", time_print(first_hours, first_minutes, first_seconds))
+        print("Time 2: ", time_print(second_hours, second_minutes, second_seconds))
+
+        comparison = time_compare(first_hours, first_minutes, first_seconds, second_hours, second_minutes, second_seconds)
+        if comparison == 0:
+            print("Time 1 is equal to Time 2")
+        if comparison == 1:
+            print("Time 1 is before Time 2")
+        if comparison == 2:
+            print("Time 1 is after Time 2")
+
+
+
+main()
+
+
+def test():
+    '''
+    Purpose: Unit tests for functions in this lab
+    '''
+    print("Behavior of time_compare ------")
+    print(time_compare(3, 15, 40, 3, 15, 40))
+    print(time_compare(12, 15, 20, 13, 15, 20))
+    print(time_compare(5, 7, 30, 5, 15, 30))
+    print(time_compare(6, 18, 30, 6, 18, 45))
+    print(time_compare(14, 5, 20, 13, 15, 20))
+    print(time_compare(5, 37, 10, 5, 15, 30))
+    print(time_compare(6, 18, 50, 6, 18, 45))
+
+    print("\nBehavior of time_print -----")
+    time_print(12, 45, 13)
+    time_print(4, 44, 15)
+    time_print(14, 9, 22)
+    time_print(17, 13, 5)
+    time_print(2, 3, 4)
+
+# Enter test() if you want to try drivers
+
+
+"""
+Test Cases: 
+
+1.	Times are equal	3,15,40	3,15, 40	0
+2.	Time1 earlier, because hours less	12, 15, 20	13, 15,20	___A.___
+3.	Time1 earlier, because minutes less	5, 7, 30	5, 15, 30	___B.___
+4.	Time1 earlier, because seconds less	6, 18, 30	6, 18, 45	___C.___
+5.	Time1 later, because hours greater	14, 5, 20	13, 15,20	___D.___
+6.	Time1 later, because minutes greater	5, 37, 10	5, 15, 30	___E.___
+7.	Time1 later, because seconds greater	6, 18, 50	6, 18, 45	___F.___
+
+
+"""
